@@ -1,0 +1,41 @@
+////////////////////////////////////////////////////////////////////////////////////////////////////
+// WARNING: This file was copied from `./kerslib/project/.vscode` directory and should not be edited
+////////////////////////////////////////////////////////////////////////////////////////////////////
+{
+    "tasks": [
+        {
+            "type": "shell",
+            "label": "build web",
+            "command": "./kerslib/project/build_web.bat",
+            "args": [],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [
+                "$msCompile"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            }
+        },
+        {
+            "type": "shell",
+            "label": "hotreload",
+            "command": "./kerslib/project/build_windows_hotreload.bat",
+            "args": [],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [
+                "$msCompile"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            }
+        }
+    ],
+
+    "version": "2.0.0"
+}
