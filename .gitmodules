@@ -1,0 +1,3 @@
+[submodule "kerslib"]
+	path = kerslib
+	url = https://github.com/kerskuchen/kerslib.git
