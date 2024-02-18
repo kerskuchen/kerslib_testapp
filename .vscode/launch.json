@@ -11,10 +11,10 @@
             "name": "debug",
             "type": "cppvsdbg",
             "request": "launch",
-            "program": "${workspaceFolder}\\bin\\launcher.exe",
+            "program": "${workspaceFolder}\\build\\launcher.exe",
             "args": [],
             "stopAtEntry": false,
-            "cwd": "${workspaceFolder}\\bin",
+            "cwd": "${workspaceFolder}\\build",
             "environment": [],
             "console": "integratedTerminal",
             // "preLaunchTask": "hotreload"
