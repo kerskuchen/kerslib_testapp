@@ -167,6 +167,8 @@ struct GameState {
 static GameState* gGame = nullptr;
 static Input* gInput    = nullptr;
 
+const char* GameGetTitle() { return "Kerslib TestApp"; }
+
 void GameKeyUp(int key) { gInput->OnKeyUp(key); }
 void GameKeyDown(int key) { gInput->OnKeyDown(key); }
 void GameScreenResize(int width, int height) { gInput->OnScreenResize(width, height); }

@@ -41,9 +41,11 @@ int main(int argc, char* argv[]) {
   int initialWindowWidth  = 640;
   int initialWindowHeight = 360;
 
+  const char* windowTitle = GameGetTitle();
+
   SDL_Init(SDL_INIT_VIDEO);
   gWindow = SDL_CreateWindow(
-      "SDLGameTest",
+      windowTitle,
       windowPosX,
       windowPosY,
       initialWindowWidth,

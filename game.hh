@@ -9,6 +9,7 @@ void PlatformDrawRect(int32 x, int32 y, int32 w, int32 h, uint32 color);
 void PlatformPanic(const char* file_path, int32 line, const char* message);
 void PlatformLog(const char* message);
 
+const char* GameGetTitle();
 void GameInit(int screenWidth, int screenHeight);
 void GameScreenResize(int screenWidth, int screenHeight);
 void GameDoFrame(float deltatime);
