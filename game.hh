@@ -9,17 +9,21 @@ void PlatformDrawRect(int32 x, int32 y, int32 w, int32 h, uint32 color);
 void PlatformPanic(const char* file_path, int32 line, const char* message);
 void PlatformLog(const char* message);
 
-void GameInit(uint32 width, uint32 height);
-void GameScreenResize(uint32 width, uint32 height);
+void GameInit(int screenWidth, int screenHeight);
+void GameScreenResize(int screenWidth, int screenHeight);
 void GameDoFrame(float deltatime);
 void GameKeyDown(int32 key);
 void GameKeyUp(int32 key);
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wunused-parameter"
+#pragma clang diagnostic ignored "-Weverything"
 #define STB_SPRINTF_STATIC
 #define STB_SPRINTF_IMPLEMENTATION
 #define STB_SPRINTF_NOUNALIGNED
 #define STB_SPRINTF_DECORATE(name) stb_##name
 #include "kerslib/thirdparty/stb_sprintf.h"
+#pragma clang diagnostic pop
 
 static char gLogbuffer[4096] = {0};
 #define LogInfo(...)                                                                               \

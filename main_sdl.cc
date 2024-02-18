@@ -32,6 +32,9 @@ void PlatformDrawRect(int x, int y, int w, int h, uint32 color) {
 }
 
 int main(int argc, char* argv[]) {
+  // TODO
+  (void)argc;
+  (void)argv;
 
   int windowPosX          = SDL_WINDOWPOS_CENTERED_DISPLAY(1);
   int windowPosY          = SDL_WINDOWPOS_CENTERED_DISPLAY(1);

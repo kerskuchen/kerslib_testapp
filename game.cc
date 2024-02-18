@@ -27,12 +27,12 @@ struct Input {
   int screenHeight       = 100;
   bool screenSizeChanged = true;
 
-  Input(uint32 screenWidth, uint32 screenHeight)
+  Input(int screenWidth, int screenHeight)
       : screenWidth(screenWidth)
       , screenHeight(screenHeight)
       , screenSizeChanged(true) {}
 
-  void OnScreenResize(uint32 width, uint32 height) {
+  void OnScreenResize(int width, int height) {
     if (screenWidth != width || screenHeight != height) {
       screenSizeChanged = true;
       screenWidth       = width;
@@ -75,11 +75,14 @@ struct GameState {
   float bouncyVelY = 0;
   int bouncySize   = 0;
 
-  void SerializeFrom(const char* filepath) {}
-  void SerializeTo(const char* filepath) {}
-
-  void OnKeyDown(int32 key) {}
-  void OnKeyUp(int32 key) {}
+  void SerializeFrom(const char* filepath) {
+    // TODO
+    (void)filepath;
+  }
+  void SerializeTo(const char* filepath) {
+    // TODO
+    (void)filepath;
+  }
 
   GameState(Input& input) {
     bouncyPosX = input.screenWidth / 2.0f;
@@ -166,10 +169,10 @@ static Input* gInput    = nullptr;
 
 void GameKeyUp(int key) { gInput->OnKeyUp(key); }
 void GameKeyDown(int key) { gInput->OnKeyDown(key); }
-void GameScreenResize(uint32 width, uint32 height) { gInput->OnScreenResize(width, height); }
+void GameScreenResize(int width, int height) { gInput->OnScreenResize(width, height); }
 
-void GameInit(uint32 width, uint32 height) {
-  gInput = new Input(width, height);
+void GameInit(int screenWidth, int screenHeight) {
+  gInput = new Input(screenWidth, screenHeight);
   gGame  = new GameState(*gInput);
   LogInfo("Game initialized");
 }
