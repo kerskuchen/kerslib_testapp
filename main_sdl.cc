@@ -36,10 +36,10 @@ int main(int argc, char* argv[]) {
   (void)argc;
   (void)argv;
 
-  int windowPosX          = SDL_WINDOWPOS_CENTERED_DISPLAY(1);
-  int windowPosY          = SDL_WINDOWPOS_CENTERED_DISPLAY(1);
-  int initialWindowWidth  = 640;
-  int initialWindowHeight = 360;
+  int windowPosX   = SDL_WINDOWPOS_CENTERED_DISPLAY(1);
+  int windowPosY   = SDL_WINDOWPOS_CENTERED_DISPLAY(1);
+  int screenWidth  = 640;
+  int screenHeight = 360;
 
   const char* windowTitle = GameGetTitle();
 
@@ -48,11 +48,11 @@ int main(int argc, char* argv[]) {
       windowTitle,
       windowPosX,
       windowPosY,
-      initialWindowWidth,
-      initialWindowHeight,
+      screenWidth,
+      screenHeight,
       SDL_WINDOW_RESIZABLE
   );
-  GameInit(initialWindowWidth, initialWindowHeight);
+  GameInit(screenWidth, screenHeight);
 
   gRenderer = SDL_CreateRenderer(gWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
   SDL_SetRenderDrawBlendMode(gRenderer, SDL_BLENDMODE_BLEND);
@@ -76,7 +76,8 @@ int main(int argc, char* argv[]) {
       case SDL_WINDOWEVENT: {
         switch (event.window.event) {
         case SDL_WINDOWEVENT_RESIZED: {
-          GameScreenResize(event.window.data1, event.window.data2);
+          screenWidth  = event.window.data1;
+          screenHeight = event.window.data2;
         } break;
         }
       } break;
@@ -85,7 +86,7 @@ int main(int argc, char* argv[]) {
 
     SDL_SetRenderDrawColor(gRenderer, 0, 0, 0, 0);
     SDL_RenderClear(gRenderer);
-    GameDoFrame(1.0f / 60.0f);
+    GameDoFrame(1.0f / 60.0f, screenWidth, screenHeight);
     SDL_RenderPresent(gRenderer);
   }
 

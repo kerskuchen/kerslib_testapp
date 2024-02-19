@@ -23,22 +23,14 @@ struct Input {
   bool keydownD     = false;
   bool keydownDPrev = false;
 
-  int screenWidth        = 100;
-  int screenHeight       = 100;
-  bool screenSizeChanged = true;
+  int screenWidth        = 0;
+  int screenHeight       = 0;
+  bool screenSizeChanged = false;
 
   Input(int screenWidth, int screenHeight)
       : screenWidth(screenWidth)
       , screenHeight(screenHeight)
       , screenSizeChanged(true) {}
-
-  void OnScreenResize(int width, int height) {
-    if (screenWidth != width || screenHeight != height) {
-      screenSizeChanged = true;
-      screenWidth       = width;
-      screenHeight      = height;
-    }
-  }
 
   void OnKeyDown(int32 key) {
     if (key == 'a')
@@ -58,7 +50,14 @@ struct Input {
       keydownD = false;
   }
 
-  void BeginFrame(float deltatime) { this->deltatime = deltatime; }
+  void BeginFrame(float deltatime, int screenWidth, int screenHeight) {
+    this->deltatime = deltatime;
+    if (this->screenWidth != screenWidth || this->screenHeight != screenHeight) {
+      this->screenWidth       = screenWidth;
+      this->screenHeight      = screenHeight;
+      this->screenSizeChanged = true;
+    }
+  }
   void EndFrame() {
     keydownAPrev = keydownA;
     keydownSPrev = keydownS;
@@ -171,7 +170,6 @@ const char* GameGetTitle() { return "Kerslib TestApp"; }
 
 void GameKeyUp(int key) { gInput->OnKeyUp(key); }
 void GameKeyDown(int key) { gInput->OnKeyDown(key); }
-void GameScreenResize(int width, int height) { gInput->OnScreenResize(width, height); }
 
 void GameInit(int screenWidth, int screenHeight) {
   gInput = new Input(screenWidth, screenHeight);
@@ -179,8 +177,8 @@ void GameInit(int screenWidth, int screenHeight) {
   LogInfo("Game initialized");
 }
 
-void GameDoFrame(float deltatime) {
-  gInput->BeginFrame(deltatime);
+void GameDoFrame(float deltatime, int screenWidth, int screenHeight) {
+  gInput->BeginFrame(deltatime, screenWidth, screenHeight);
   gGame->DoFrame(*gInput);
   gInput->EndFrame();
 }
