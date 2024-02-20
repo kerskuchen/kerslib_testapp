@@ -1,5 +1,7 @@
 #include "game.cc"
 
+#include "kerslib/core.hh"
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -8,15 +10,15 @@
 static SDL_Window* gWindow     = nullptr;
 static SDL_Renderer* gRenderer = nullptr;
 
-void PlatformLog(const char* message) { printf("[INFO] %s\n", message); }
-
-void PlatformPanic(const char* file_path, int line, const char* message) {
-  fprintf(stderr, "%s:%d - FATAL ERROR: %s\n", file_path, line, message);
+void PlatformLog(const char* file, int line, const char* message) {
+  printf("%s -- %s:%d\n", message, file, line);
+}
+void PlatformPanic(const char* file, int line, const char* message) {
+  fprintf(stderr, "PANIC: %s -- %s:%d\n", message, file, line);
   abort();
 }
-
 void PlatformDrawRect(int x, int y, int w, int h, uint32 color) {
-  Assert(gRenderer, "No renderer");
+  AssertM(gRenderer, "No renderer");
   SDL_Rect rect = {
       x,
       y,
